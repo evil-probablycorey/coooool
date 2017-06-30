@@ -1,4 +1,7 @@
-
+html, body {
+  margin: 0;
+  padding: 0;
+}
 
 ●▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ Yᵒᵘ Oᶰˡʸ Lᶤᵛᵉ Oᶰᶜᵉ ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬●
 
@@ -16,3 +19,72 @@
 
 ●▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ Yᵒᵘ Oᶰˡʸ Lᶤᵛᵉ Oᶰᶜᵉ ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬●
 
+const canvas = document.querySelector('canvas')
+const ctx = canvas.getContext('2d')
+
+const bird = {
+  x: canvas.width / 2,
+  y: canvas.height / 2,
+  size: 10,
+  xVelocity: 3,
+  yVelocity: 1
+}
+
+const rock = {
+  x: canvas.width,
+  y: canvas.height - 25,
+  height: 25,
+  depth: 20
+}
+
+const gameLoop = () => {  
+  draw()
+  update()
+  window.requestAnimationFrame(gameLoop)
+}
+
+const draw = () => {
+  if (didBirdHitRock()) {
+    ctx.fillStyle = '#FF4136' // Red
+  } else {
+    ctx.fillStyle = '#000' // Black
+  }
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
+  
+  // Draw the bird
+  ctx.fillStyle = '#FFDC00'
+  ctx.fillRect(bird.x, bird.y, bird.size, bird.size)
+  
+  // Draw the rock
+  ctx.fillStyle = '#01FF70'
+  ctx.fillRect(rock.x, rock.y, rock.depth, rock.height)
+}
+
+const update = () => {
+  bird.yVelocity = bird.yVelocity - 0.09 // Gravity
+  bird.y = bird.y - bird.yVelocity  
+  if (bird.y >= canvas.height - bird.size) {
+    bird.yVelocity = 0
+    bird.y = canvas.height - bird.size
+  }
+  
+  rock.x = rock.x - bird.xVelocity
+  if (rock.x + rock.depth <= 0) {
+    rock.x = canvas.width
+  }
+}
+
+const didBirdHitRock = () => {
+  const horizontalIntersection = bird.x > rock.x && bird.x + bird.size < rock.x + rock.depth
+  const verticalIntersection = bird.y + bird.size >= rock.y
+  return horizontalIntersection && verticalIntersection
+} 
+
+const flapWings = (event) => {
+  event.preventDefault()
+  bird.yVelocity = Math.max(bird.yVelocity + 1, 3)
+}
+
+canvas.addEventListener('click', flapWings)
+canvas.addEventListener('touchstart', flapWings)
+gameLoop()
