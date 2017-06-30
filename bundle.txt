@@ -72,11 +72,17 @@ window.requestAnimationFrame(() => {
     ctx.fillRect(x, y, width, height)
 
     if (segment.x === player.x && segment.y === player.y) {
-
+      ctx.fillStyle = 'red'
+      ctx.fillRect(0, 0, cavas.width, canvas.height)
+      player.tail = player.tail.splice(0, 3)
     }
   })
-  ctx.fillStyle = 'red'
+
+  if (food.x === player.x && food.y === player.y) {
+    food.x = Math.floor(Math.random() * tileCount)
+    food.y = Math.floor(Math.random() * tileCount)
+    player.tail.push({x: player.x, y: player.y})
+  } 
   
-  ctx
 
 })
