@@ -74,17 +74,20 @@ const loop = () => {
   draw(player)
   player.tail.forEach(segment => {
     draw(segment)
+    // console.log(segment)
     if (segment.x === player.x && segment.y === player.y) {
       ctx.fillStyle = 'red'
-      ctx.fillRect(0, 0, cavas.width, canvas.height)
-      player.tailLength = 3
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+      player.tailLength = 30
       player.tail = []
+      // console.log(player)
     }
   })
 
   player.tail.push(Object.assign({}, player))
   while (player.tail.length > player.tailLength) {
     player.tail.shift()
+    console.log(player)
   }
 
   if (food.x === player.x && food.y === player.y) {
