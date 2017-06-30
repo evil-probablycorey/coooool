@@ -78,11 +78,13 @@ const loop = () => {
       ctx.fillStyle = 'red'
       ctx.fillRect(0, 0, cavas.width, canvas.height)
       player.tailSize = 3
-      player.tail = []
     }
   })
 
   player.tail.push(Object.assign({}, player))
+  while (player.tail.size > player.tailSize) {
+    player.tail.unshift()
+  }
 
   if (food.x === player.x && food.y === player.y) {
     food.x = Math.floor(Math.random() * tileCount)
