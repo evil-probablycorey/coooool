@@ -23,7 +23,7 @@ const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext('2d')
 
 let velocity = { x: 0, y: 0 }
-let player = { x: 15, y: 15, tail: [] } 
+let player = { x: 15, y: 15, tail: [] }
 let food = { x: 10, y: 10 }
 let gridSize = 10
 let tileCount = 30
