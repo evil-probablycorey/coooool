@@ -4,7 +4,7 @@ html, body {
 }
 
 canvas {
- overflow: hidden;
+  display: block;
 }
 
 ●▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ Yᵒᵘ Oᶰˡʸ Lᶤᵛᵉ Oᶰᶜᵉ ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬●
@@ -49,6 +49,7 @@ const keydown = (event) => {
 }
   
 const loop = () => {
+  console.log(player)
   player.x += velocity.x
   player.y += velocity.y
 
