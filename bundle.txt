@@ -27,7 +27,7 @@ const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext('2d')
 
 let velocity = { x: 0, y: 0 }
-let player = { x: 15, y: 15, tail: [], tailSize: 3 }
+let player = { x: 15, y: 15, tail: [], tailLength: 30 }
 let food = { x: 10, y: 10 }
 let gridSize = 10
 let tileCount = 30
@@ -67,29 +67,30 @@ const loop = () => {
   ctx.fillStyle = 'black'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-  ctx.fillStyle = 'green'
+  ctx.fillStyle = 'tomato'
   draw(food)
 
-  ctx.fillStyle = 'tomato'
+  ctx.fillStyle = 'green'
   draw(player)
   player.tail.forEach(segment => {
     draw(segment)
     if (segment.x === player.x && segment.y === player.y) {
       ctx.fillStyle = 'red'
       ctx.fillRect(0, 0, cavas.width, canvas.height)
-      player.tailSize = 3
+      player.tailLength = 3
+      player.tail = []
     }
   })
 
   player.tail.push(Object.assign({}, player))
-  while (player.tail.size > player.tailSize) {
-    player.tail.unshift()
+  while (player.tail.length > player.tailLength) {
+    player.tail.shift()
   }
 
   if (food.x === player.x && food.y === player.y) {
     food.x = Math.floor(Math.random() * tileCount)
     food.y = Math.floor(Math.random() * tileCount)
-    player.tail.push({x: player.x, y: player.y})
+    player.tailLength++
   } 
 }
 
