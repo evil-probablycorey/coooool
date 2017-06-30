@@ -28,7 +28,7 @@ let food = { x: 10, y: 10 }
 let gridSize = 10
 let tileCount = 30
 
-document.addEventListener('keydown', (event) => {
+const keydown = (event) => {
   if (event.key === 'ArrowLeft') {
     velocity.x = -1
     velocity.y = 0
@@ -42,9 +42,9 @@ document.addEventListener('keydown', (event) => {
     velocity.x = 0
     velocity.y = 1
   }
-})
-
-window.requestAnimationFrame(() => {
+}
+  
+const loop = () => {
   player.x += velocity.x
   player.y += velocity.y
 
@@ -61,10 +61,10 @@ window.requestAnimationFrame(() => {
   }
 
   ctx.fillStyle = 'black'
-  ctx.fillRect(0, 0, cavas.width, canvas.height)
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
 
   ctx.fillStyle = 'tomato'
-  tail.forEach(segment => {
+  player.tail.forEach(segment => {
     const x = segment.x * gridSize
     const y = segment.y * gridSize
     const width = gridSize - 2
@@ -83,6 +83,9 @@ window.requestAnimationFrame(() => {
     food.y = Math.floor(Math.random() * tileCount)
     player.tail.push({x: player.x, y: player.y})
   } 
-  
 
-})
+  window.requestAnimationFrame(loop)
+}
+
+document.addEventListener('keydown', keydown)
+window.requestAnimationFrame(loop)
