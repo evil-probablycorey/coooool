@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <canvas>
+  <canvas width='300' height='300' />
 </body>
 </html>
 
