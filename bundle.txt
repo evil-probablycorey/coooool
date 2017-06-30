@@ -3,6 +3,10 @@ html, body {
   padding: 0;
 }
 
+canvas {
+ overflow: hidden;
+}
+
 ●▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ Yᵒᵘ Oᶰˡʸ Lᶤᵛᵉ Oᶰᶜᵉ ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬●
 
 <!doctype html>
