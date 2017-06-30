@@ -21,3 +21,62 @@ html, body {
 
 const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext('2d')
+
+let velocity = { x: 0, y: 0 }
+let player = { x: 15, y: 15, tail: [] } 
+let food = { x: 10, y: 10 }
+let gridSize = 10
+let tileCount = 30
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'ArrowLeft') {
+    velocity.x = -1
+    velocity.y = 0
+  } else if (event.key === 'ArrowUp') {
+    velocity.x = 0
+    velocity.y = -1
+  } else if (event.key === 'ArrowRight') {
+    velocity.x = 1
+    velocity.y = 0
+  } else if (event.key === 'ArrowDown') {
+    velocity.x = 0
+    velocity.y = 1
+  }
+})
+
+window.requestAnimationFrame(() => {
+  player.x += velocity.x
+  player.y += velocity.y
+
+  if (player.x < 0) {
+    player.x = tileCount - 1
+  } else if (player.x > tileCount) {
+    player.x = 0
+  }
+
+  if (player.y < 0) {
+    player.y = tileCount - 1
+  } else if (player.y > tileCount) {
+    player.y = 0
+  }
+
+  ctx.fillStyle = 'black'
+  ctx.fillRect(0, 0, cavas.width, canvas.height)
+
+  ctx.fillStyle = 'tomato'
+  tail.forEach(segment => {
+    const x = segment.x * gridSize
+    const y = segment.y * gridSize
+    const width = gridSize - 2
+    const height = gridSize - 2
+    ctx.fillRect(x, y, width, height)
+
+    if (segment.x === player.x && segment.y === player.y) {
+
+    }
+  })
+  ctx.fillStyle = 'red'
+  
+  ctx
+
+})
