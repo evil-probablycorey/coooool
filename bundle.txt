@@ -29,8 +29,8 @@ const ctx = canvas.getContext('2d')
 let velocity = { x: 0, y: 0 }
 let player = { x: 15, y: 15, tail: [], tailLength: 0 }
 let food = { x: 10, y: 10 }
-let gridSize = 10
-let tileCount = 30
+let gridSize = 15
+let tileCount = 20
 
 const keydown = (event) => {
   if (event.key === 'ArrowLeft') {
